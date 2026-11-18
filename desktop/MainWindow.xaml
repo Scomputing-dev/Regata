@@ -1,0 +1,251 @@
+<Window x:Class="Regata.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Regata — Learn by building" Width="1450" Height="900"
+        MinWidth="1100" MinHeight="700" WindowStartupLocation="CenterScreen"
+        Background="#FFF9EC" PreviewKeyDown="Window_PreviewKeyDown">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="76" />
+      <RowDefinition Height="48" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="28" />
+    </Grid.RowDefinitions>
+
+    <Border Grid.Row="0" Background="#FFD332" BorderBrush="#E0B52B" BorderThickness="0,0,0,2">
+      <DockPanel Margin="20,0">
+        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center">
+          <Grid Width="150" Height="58" Margin="0,0,16,0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="22" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <UniformGrid Rows="1" Columns="4" Background="#FFE986">
+              <Border Padding="5,1"><Ellipse Fill="#FFF7C6" Stroke="#26364C" StrokeThickness="1" /></Border>
+              <Border Padding="5,1"><Ellipse Fill="#FFF7C6" Stroke="#26364C" StrokeThickness="1" /></Border>
+              <Border Padding="5,1"><Ellipse Fill="#FFF7C6" Stroke="#26364C" StrokeThickness="1" /></Border>
+              <Border Padding="5,1"><Ellipse Fill="#FFF7C6" Stroke="#26364C" StrokeThickness="1" /></Border>
+            </UniformGrid>
+            <Border Grid.Row="1" Background="#FFC928" BorderBrush="#26364C" BorderThickness="2">
+              <TextBlock Text="Regata" FontFamily="Segoe Script" FontSize="20" FontWeight="Bold"
+                         FontStyle="Italic" Foreground="#26364C" HorizontalAlignment="Center"
+                         VerticalAlignment="Center" />
+            </Border>
+          </Grid>
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="YOUR CODE, YOUR WAY" FontSize="11" FontWeight="ExtraBold" />
+            <TextBlock Text="Write it. Understand it. Make it yours." Margin="0,3,0,0"
+                       FontSize="11" Foreground="#526276" />
+          </StackPanel>
+        </StackPanel>
+        <Button DockPanel.Dock="Right" VerticalAlignment="Center" Style="{StaticResource QuietButton}"
+                Content="Connect Groq tutor" Click="ConnectTutor_Click" />
+      </DockPanel>
+    </Border>
+
+    <Border Grid.Row="1" Background="#FFFDF7" BorderBrush="#E5DDCC" BorderThickness="0,0,0,1">
+      <DockPanel Margin="16,0" LastChildFill="False">
+        <Button DockPanel.Dock="Left" Style="{StaticResource ActionButton}" Content="＋ New project"
+                Click="NewProject_Click" />
+        <Button DockPanel.Dock="Left" Margin="8,0,0,0" Style="{StaticResource QuietButton}"
+                Content="Open project" Click="OpenProject_Click" />
+        <Border DockPanel.Dock="Left" Width="1" Height="26" Margin="13,0"
+                Background="#DAD4C8" />
+        <Button DockPanel.Dock="Left" Style="{StaticResource QuietButton}" Content="＋ New file"
+                Click="NewFile_Click" />
+        <Button DockPanel.Dock="Left" Margin="7,0,0,0" Style="{StaticResource QuietButton}"
+                Content="Save  Ctrl+S" Click="SaveFile_Click" />
+        <Button DockPanel.Dock="Left" Margin="7,0,0,0" Style="{StaticResource ActionButton}"
+                Content="▶ Preview" Click="Preview_Click" />
+        <Button x:Name="ShareButton" DockPanel.Dock="Left" Margin="7,0,0,0" Style="{StaticResource QuietButton}"
+                Content="Share on Wi-Fi" Click="Share_Click" />
+        <TextBlock x:Name="ProjectPathLabel" DockPanel.Dock="Right" MaxWidth="330"
+                   Margin="14,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource MutedBrush}"
+                   FontSize="10" TextTrimming="CharacterEllipsis" />
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Row="2" Margin="12">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="210" />
+        <ColumnDefinition Width="10" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="10" />
+        <ColumnDefinition Width="330" />
+      </Grid.ColumnDefinitions>
+
+      <Border Grid.Column="0" Padding="12" Background="#FFFFFF" BorderBrush="#D9D3C5"
+              BorderThickness="1" CornerRadius="10">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <StackPanel>
+            <TextBlock Text="YOUR PROJECT" FontSize="10" FontWeight="ExtraBold"
+                       Foreground="#536477" />
+            <TextBlock x:Name="ProjectNameLabel" Text="No project open" Margin="0,4,0,0"
+                       FontSize="15" FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+          </StackPanel>
+          <TextBlock Grid.Row="1" Text="FILES" Margin="0,20,0,8" FontSize="9"
+                     FontWeight="Bold" Foreground="#778494" />
+          <ListBox x:Name="FileList" Grid.Row="2" BorderThickness="0" Background="Transparent"
+                   SelectionChanged="FileList_SelectionChanged" FontFamily="Consolas" FontSize="11"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemContainerStyle>
+              <Style TargetType="ListBoxItem">
+                <Setter Property="Padding" Value="7,8" />
+                <Setter Property="Margin" Value="0,1" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                      <Border x:Name="FileBorder" Padding="{TemplateBinding Padding}"
+                              Background="Transparent" CornerRadius="5">
+                        <ContentPresenter />
+                      </Border>
+                      <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                          <Setter TargetName="FileBorder" Property="Background" Value="#EAF7FC" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                          <Setter TargetName="FileBorder" Property="Background" Value="#FFF0B5" />
+                        </Trigger>
+                      </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ListBox.ItemContainerStyle>
+          </ListBox>
+          <TextBlock Grid.Row="3" Text="Tip: keep each file focused on one job."
+                     Margin="0,12,0,0" Foreground="{StaticResource MutedBrush}"
+                     FontSize="10" TextWrapping="Wrap" />
+        </Grid>
+      </Border>
+
+      <Grid Grid.Column="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="190" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#26364C" BorderBrush="#26364C"
+                BorderThickness="2" CornerRadius="10">
+          <Grid Margin="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="39" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Background="#31445D" CornerRadius="8,8,0,0">
+              <DockPanel Margin="14,0">
+                <TextBlock x:Name="ActiveFileLabel" Text="Open a file to start coding"
+                           VerticalAlignment="Center" Foreground="#FFFFFF" FontSize="11"
+                           FontFamily="Consolas" />
+                <TextBlock DockPanel.Dock="Right" Text="HTML · CSS · JS"
+                           VerticalAlignment="Center" Foreground="#BAC8D8" FontSize="9" />
+              </DockPanel>
+            </Border>
+            <TabControl x:Name="EditorTabs" Grid.Row="1" Background="#26364C"
+                        BorderThickness="0" SelectionChanged="EditorTabs_SelectionChanged">
+              <TabControl.Resources>
+                <Style TargetType="TabItem">
+                  <Setter Property="Padding" Value="13,7" />
+                  <Setter Property="Foreground" Value="#26364C" />
+                  <Setter Property="FontSize" Value="10" />
+                </Style>
+              </TabControl.Resources>
+            </TabControl>
+          </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Margin="0,9,0,0" Background="#FFFFFF" BorderBrush="#D9D3C5"
+                BorderThickness="1" CornerRadius="9">
+          <Grid Margin="11">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="25" />
+              <RowDefinition Height="35" />
+              <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel>
+              <TextBlock Text="TERMINAL" FontSize="10" FontWeight="ExtraBold"
+                         VerticalAlignment="Center" />
+              <TextBlock DockPanel.Dock="Right" Text="Commands run in your project folder"
+                         FontSize="9" Foreground="{StaticResource MutedBrush}"
+                         VerticalAlignment="Center" />
+            </DockPanel>
+            <DockPanel Grid.Row="1" Margin="0,4,0,5">
+              <Button DockPanel.Dock="Right" Margin="7,0,0,0" Style="{StaticResource QuietButton}"
+                      Content="Run" Click="RunCommand_Click" />
+              <TextBox x:Name="TerminalInput" Padding="8,5" FontFamily="Consolas" FontSize="11"
+                       VerticalContentAlignment="Center" BorderBrush="#D9D3C5"
+                       KeyDown="TerminalInput_KeyDown" />
+            </DockPanel>
+            <TextBox x:Name="TerminalOutput" Grid.Row="2" Padding="7" IsReadOnly="True"
+                     AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                     Background="#F8F7F1" BorderThickness="0" FontFamily="Consolas" FontSize="10"
+                     Foreground="#435466" />
+          </Grid>
+        </Border>
+      </Grid>
+
+      <Border Grid.Column="4" Padding="14" Background="#E5F6FC" BorderBrush="#26364C"
+              BorderThickness="2" CornerRadius="10">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <StackPanel>
+            <TextBlock Text="YOUR PATIENT CODING GUIDE" FontSize="9" FontWeight="ExtraBold"
+                       Foreground="#2A758F" />
+            <TextBlock Text="Hints before answers." Margin="0,5,0,0" FontSize="19"
+                       FontWeight="ExtraBold" />
+            <TextBlock Text="Ask what a line does, or where to look next. The tutor explains; you write and decide."
+                       Margin="0,5,0,0" Foreground="#526577" FontSize="10"
+                       TextWrapping="Wrap" LineHeight="16" />
+          </StackPanel>
+          <TextBox x:Name="TutorTranscript" Grid.Row="1" Grid.RowSpan="2" Margin="0,13,0,12"
+                   Padding="11" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"
+                   VerticalScrollBarVisibility="Auto" Background="#FFFFFF" BorderBrush="#D3E5EA"
+                   FontSize="11" Foreground="#33475B"
+                   Text="Welcome! Tell me what you are trying to understand. I’ll start with a small hint and explain the idea before showing a solution.&#x0a;&#x0a;Your project files stay on this computer. The tutor only receives your question, and only receives your current file if you opt in below." />
+          <CheckBox x:Name="IncludeFileCheckBox" Grid.Row="3" Margin="0,0,0,10"
+                    Content="Include current file in my question (sent to Groq)"
+                    FontSize="10" Foreground="#46596B" />
+          <TextBox x:Name="TutorPromptBox" Grid.Row="4" MinHeight="80" MaxHeight="130"
+                   Padding="9" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                   VerticalContentAlignment="Top" BorderBrush="#C8D9DF"
+                   ToolTip="Ask a question. Your code is never included unless you check the box above." />
+          <Grid Grid.Row="5" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="TutorStatus" Text="Connect Groq to ask your tutor."
+                       VerticalAlignment="Center" Foreground="#647585" FontSize="9"
+                       TextWrapping="Wrap" />
+            <Button x:Name="AskTutorButton" Grid.Column="1" Margin="8,0,0,0"
+                    Style="{StaticResource ActionButton}" Content="Ask for a hint"
+                    Click="AskTutor_Click" />
+          </Grid>
+        </Grid>
+      </Border>
+    </Grid>
+
+    <Border Grid.Row="3" Background="#FFF0B5" BorderBrush="#E7D38A" BorderThickness="0,1,0,0">
+      <DockPanel Margin="14,0">
+        <TextBlock x:Name="WorkspaceStatus" Text="Ready when you are — create a project or open one."
+                   VerticalAlignment="Center" FontSize="10" Foreground="#526174" />
+        <TextBlock x:Name="PreviewStatus" DockPanel.Dock="Right" Text="Preview stopped"
+                   VerticalAlignment="Center" FontSize="9" Foreground="#526174" />
+      </DockPanel>
+    </Border>
+  </Grid>
+</Window>

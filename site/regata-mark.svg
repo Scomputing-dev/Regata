@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 100" role="img" aria-labelledby="title">
+  <title id="title">Regata, a flat yellow brick with four studs and a handwritten wordmark</title>
+  <g stroke="#26364c" stroke-width="4" stroke-linejoin="round">
+    <rect x="10" y="29" width="260" height="62" rx="6" fill="#ffd332"/>
+    <ellipse cx="57" cy="27" rx="18" ry="12" fill="#ffe986"/>
+    <ellipse cx="112" cy="27" rx="18" ry="12" fill="#ffe986"/>
+    <ellipse cx="168" cy="27" rx="18" ry="12" fill="#ffe986"/>
+    <ellipse cx="223" cy="27" rx="18" ry="12" fill="#ffe986"/>
+  </g>
+  <text x="140" y="78" text-anchor="middle" fill="#26364c"
+        font-family="Caveat, 'Segoe Print', cursive" font-size="44" font-style="italic" font-weight="700">Regata</text>
+</svg>

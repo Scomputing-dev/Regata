@@ -29,4 +29,4 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-The workflow at `.github/workflows/release.yml` builds and attaches `Regata-Windows-x64.zip`. The website's download button points to the repository's latest release on GitHub Pages.
+The workflow at `.github/workflows/release.yml` builds a self-contained, compressed `Regata.Desktop.exe` and also attaches `Regata-Windows-x64.zip` as an alternative. The website's download button downloads the executable directly from the latest GitHub release.
